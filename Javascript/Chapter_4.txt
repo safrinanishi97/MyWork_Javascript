@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <script>
+    console.log('Date time');
+
+    const today = new Date();
+    console.log(today.getFullYear());
+    console.log(today.getMonth());
+    console.log(today.getDay());
+
+    const stringDate = "11/22/2024";
+    const dateArray = stringDate.split("/");
+    console.log(dateArray);
+    
+    const year = dateArray[2];
+    const month = dateArray[0];
+    const day = dateArray[1];
+  
+    const eventDate = new Date(year, month-1, day);
+    console.log(eventDate);
+
+    const today1 = new Date();
+    const todayDifferent = new Date();
+    console.log(today1.getDate() === todayDifferent.getDate());
+
+</script>
+    <script>
+          console.log("Comparing_Dates");
+        const oldDate = new Date(1999, 10, 20);
+        const newDate = new Date(2021, 1, 1);
+        if (newDate > oldDate) 
+        {
+        console.log("true");
+        } 
+        else 
+        {
+        console.log("false");
+        }
+
+
+        console.log("Difference between old and new date in days");
+        const differenceInMiliseconds = newDate - oldDate;
+        const milisecondsPerDays = 24 * 60 * 60 * 1000;
+        let differenceInDays = differenceInMiliseconds / milisecondsPerDays;
+        differenceInDays = Math.trunc(differenceInDays);
+        console.log(differenceInDays);
+    </script>
+
+
+<script>
+    console.log("Adding Days To Date");
+
+    const today2 = new Date();
+    const days = today2.getDate();
+    console.log(days);
+    today2.setDate(days + 20);
+    console.log(today2);
+</script>
+
+<script>
+    console.log("Dat To String");
+    const date = new Date(2024, 0, 1, 10, 30);
+
+    let dateString=date.toString();
+    console.log(dateString);
+
+    dateString = date.toTimeString();
+    console.log(dateString);
+
+    dateString = date.toUTCString();
+    console.log(dateString);
+
+    dateString = date.toDateString();
+    console.log(dateString);
+
+    dateString = date.toLocaleDateString();
+    console.log(dateString);
+
+    dateString = date.getFullYear().toString().substr(-2);
+    console.log(dateString);
+</script>
+
+
+<body>
+  <p id="datePlase"></p>
+  <p id="datePlase0"></p>
+  <p id="datePlase1"></p>
+  <p id="datePlase2"></p>
+  <p id="datePlase3"></p>
+  <p id="datePlase4"></p>
+
+<script>
+    console.log("Date in different format");
+
+    const currentDate = (document.getElementById("datePlase").innerHTML =new Date());
+    console.log(currentDate);
+
+    const currentDate1 = (document.getElementById("datePlase1").innerHTML =new Date().getDate());
+    console.log(currentDate1);
+
+    const currentDate2 = (document.getElementById("datePlase2").innerHTML =new Date().getMonth());
+    console.log(currentDate2);
+
+    const currentDate3 = (document.getElementById("datePlase3").innerHTML =new Date().getFullYear());
+    console.log(currentDate3);
+
+    const currentDate4 = (document.getElementById("datePlase4").innerHTML =new Date().getUTCMilliseconds());
+    console.log(currentDate4);
+</script>
+</body>
+</html>

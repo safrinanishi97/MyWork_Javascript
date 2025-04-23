@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>My Website</title>
+</head>
+<body>
+  <h1>This web page is created</h1>
+  <p>1. For error checking,</p>
+  <p>2. For checking the function of "use strict" mode,</p>
+  <p>1. For testing the server where the code is running.</p>
+
+  <h2>Please check the console in developer tool...</h2>
+
+    <script>
+        console.log('Here is the Error.');
+    </script>
+  
+    <script>
+        try 
+        {
+        const myNumber = undefinedVariable;
+        }
+        catch (error) 
+        {
+        console.error('An error occurred:', error.message);
+        }
+
+        
+    </script>
+
+   <script>
+    const addNumber = 20+15;
+    console.log(`The summation of two number is: ${addNumber}`);
+    </script>
+
+    <script>
+        'use strict';
+        firstNumber = 1;
+        lastNumber = 5;
+        console.log(addRange(firstNumber,lastNumber));
+        
+        function addRange(start, end) {
+        let sum = 0;
+        for (let i = start; i < end+1; i++) {
+        sum += i;
+        }
+        return sum;
+        } 
+    </script>
+
+    <script>
+    if (window.location.protocol === 'file:') {
+    console.log('Running as a local file!');
+    }
+    else if (window.location.host.startsWith('localhost')) {
+    console.log('Running on a local server');
+    }
+    else {
+    console.log('Running on a remote web server');
+    }
+    </script>
+
+</body>
+</html>

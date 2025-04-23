@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        console.log('Object checking');
+ 
+         const num=42;
+         if(num instanceof Object){
+             console.log(`It is a object`);
+         }
+         else
+         {
+             console.log(`It is not an object`);
+         }
+ 
+ 
+         const testString='IsDB';
+         if(testString instanceof Object){
+             console.log(`It is a object`);
+         }
+         else
+         {
+             console.log(`It is not an object`);
+         }
+ 
+         const myObj=new Date();
+         if(myObj instanceof Object){
+             console.log(`It is an object`);
+         }
+         else
+         {
+             console.log(`It is not an object`);
+         }
+         const myObj1=new Date();
+         if(typeof myObj1==='object'){
+             console.log(`It is an object`);
+         }
+ 
+         const num1=42;
+         if(!(num1 instanceof Object)){
+             console.log(`It is not an object`);
+         }
+ 
+         const testString1='IsDB';
+         if(!(testString1 instanceof Object)){
+             console.log(`It is not an object`);
+         }
+     </script>
+
+
+<script>
+    console.log("Object literal");
+        const employee={
+        employeeId:100,
+        firstName:'Safrina',
+        lastName:'Nishi',
+        birthPlace:{country:'Bangladesh',city:'Dhaka'}
+    }
+    console.log(employee);
+    console.log(employee.birthPlace);
+    console.log(employee.birthPlace.country);
+    console.log(employee.birthPlace.city);
+
+    const emp = Object.keys(employee);
+    for (const property of emp) {
+      console.log(property);
+    }
+</script>
+
+
+<script>
+
+    const student = {
+      fName: "aaaa",
+      lName: "bbbb",
+    };
+    const address = {
+      city: "Dhaka",
+      country: "Bangladesh",
+    };
+
+    const studentInfo = { ...student, ...address };
+    console.log(studentInfo);
+
+    const sInfo = Object.keys(studentInfo);
+    for (const s of sInfo) {
+      console.log(s);
+    }
+
+    const copyS = { ...studentInfo };
+    console.log(copyS);
+</script>
+
+
+<script>
+    console.log('Deep copy');
+    const student3={
+           studentId:100,
+           firstName:'Safrina',
+           lastName:'Nishi',
+           testScores:[78,88,95,99,96],
+       } 
+       function copyStudent(s){
+           const studentCopy={...s};
+           studentCopy.testScores=[...studentCopy.testScores];
+           return studentCopy
+       }
+       const studentCopy=copyStudent(student3);
+       studentCopy.testScores[0]=90;
+       console.log(student3.testScores[0]);
+       console.log(studentCopy.testScores[0]);
+   </script>
+
+<script>
+    console.log('Has Property');
+   const student2={
+       studentId:100,
+       firstName:'Safrina',
+       lastName:'Nishi',
+       birthPlace:{country:'Bangladesh',city:'Dhaka'}
+   }
+   console.log(student.hasOwnProperty('birthPlace'));
+   console.log(student.hasOwnProperty('dateOfBirth'));
+</script>
+
+<script>
+    console.log('Enum');
+    const TrafficLight={
+        Green:Symbol('green'),
+        Red:Symbol('red'),
+        Yellow:Symbol('yellow')
+    }
+    function SwitchLight(newLight){
+        if(newLight===TrafficLight.Green){
+          console.log('Turning light into Green');
+        }
+        else if(newLight===TrafficLight.Red)
+        {
+            console.log('Turning light into Red');
+        }
+        else
+        {
+            console.log('Turning light into Yellow');
+        }
+        return newLight;
+    }
+    let light=TrafficLight.Green;
+    light=SwitchLight(light);
+    console.log(light);
+    light=SwitchLight(TrafficLight.Yellow);
+    console.log(light);
+    light=SwitchLight(TrafficLight.Red);
+    console.log(light);
+
+
+    </script>
+</body>
+</html>

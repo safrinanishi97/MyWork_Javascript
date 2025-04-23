@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        console.log('WithArray map');
+        const nums=[1,2,3,4,5,6,7,8,9,10];
+        function squereNumber(number){
+        return number**2
+        }
+        const squeres=nums.map(squereNumber);
+        console.log(squeres);
+
+        console.log('With Arrow syntex');
+        const nums1=[1,2,3,4,5,6,7,8,9,10];
+        const squere=nums1.map(number=>number**2);
+        console.log(squere)
+
+        console.log(' traditional function syntex');
+        function applyTitleCase(inputString){
+        const wordArray=inputString.split(' ');
+
+        const processingWordArray=[];
+        for(const word of wordArray){
+            processingWordArray.push(word[0].toUpperCase()+word.slice(1)+',');
+        }
+        return processingWordArray.join(' ');
+        }
+        console.log( applyTitleCase('aaa bbb ccc aaa sss ddd'));
+
+        console.log(' traditional function syntex with arrow function');
+
+        const myFunc=inputString=>{
+            const wordArray1=inputString.split(' ');
+
+            const processingWordArray=[];
+            for(const word of wordArray1){
+            processingWordArray.push(word[0].toUpperCase()+word.slice(1)+',');
+        }
+        return processingWordArray.join(' ');
+      }
+    console.log( myFunc('aaa bbb ccc aaa sss ddd'));
+    </script>
+
+
+    <script>
+        console.log(' default parameter value');
+        function addNumbers(firstNum=10,secondNum=20,thirdNum=30,multiplier=1){
+            return multiplier*(firstNum+secondNum+thirdNum);
+        }
+
+        const sum=addNumbers()
+        console.log(sum);
+
+        const sum1=addNumbers(42,10,undefined,1)
+        console.log(sum1);
+
+        const sum2=addNumbers(42,10,null,1)
+        console.log(sum2);
+    </script>
+
+
+
+<script>
+            console.log('named function');
+
+    function dateDifferenceInSeconds(newerDate, olderDate, options = {}) {
+        const { discardTime = false, discardYears = false, precision = null } = options;
+
+        const newDateCopy = new Date(newerDate);
+        const oldDateCopy = new Date(olderDate);
+
+        if (discardTime) {
+            newDateCopy.setHours(0, 0, 0, 0);
+            oldDateCopy.setHours(0, 0, 0, 0);
+        }
+
+        if (discardYears) {
+            newDateCopy.setFullYear(2000);
+            oldDateCopy.setFullYear(2000);
+        }
+
+        const differenceInSeconds = (newDateCopy - oldDateCopy) / 1000;
+        return precision !== null ? differenceInSeconds.toFixed(precision) : differenceInSeconds;
+    }
+
+    const newDates = new Date();
+    const oldDates = new Date(2010, 1, 10);
+
+    console.log(dateDifferenceInSeconds(newDates, oldDates));
+
+    console.log(dateDifferenceInSeconds(newDates, oldDates, { discardYears: true, precision: 2 }));
+</script>
+
+
+<script>          
+  console.log('recursive algorithm');
+
+    function factorial(n){
+      return n<=1 ? 1 :n*factorial(n-1);
+    }
+    console.log(factorial(8));
+</script>
+
+    <script>
+        function sumRound(...numbers){
+            let sum=0;
+            for(let i=0;i<numbers.length;i+=1)
+            {
+                sum += Math.round(numbers[i]);
+            }
+            return sum;
+        }
+        console.log(sumRound(2,34,76.8,67.6,876,5678));
+    </script>
+
+
+    <button id="btn">Click</button>
+<script>
+      console.log("Passing a function as an argument");
+      document
+        .getElementById("btn")
+        .addEventListener("click", buttenClick, false);
+
+      function buttenClick() {
+        setTimeout(showMassage, 2000);
+      }
+      function showMassage() {
+        alert("You have clicked the butten 2 second ago");
+      }
+   </script>
+
+
+   <script>
+      function createCounter() {
+        let count = 0;
+        function counter() {
+          count += 1;
+          console.log(count);
+        }
+        return counter;
+      }
+      const counterFunction = createCounter();
+      counterFunction();
+      counterFunction();
+      counterFunction();
+      counterFunction();
+   </script>
+
+
+<script>
+    function* generateValue(){
+        yield 54678.566;
+        yield 123.321;
+        yield true;
+        return 'This is the last value';
+
+    }
+    const generator=generateValue();
+    console.log(generator.next().value);
+    console.log(generator.next().value);
+    console.log(generator.next().value);
+    console.log(generator.next().value);
+
+    //using loop
+
+    for(const value of generateValue())
+    {
+        console.log(value);
+    }
+
+    ///using rest operator
+     const values=[...generateValue()];
+     console.log(values);
+</script>
+</body>
+</html>

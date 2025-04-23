@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Shape {
+            getArea() {
+                throw new Error("getArea() must be implemented in a subclass");
+            }
+        }
+    
+        class Rectangle extends Shape {
+            #width;  
+            #height; 
+    
+            constructor(width, height) {
+                super();
+                this.#width = width; 
+                this.#height = height;
+            }
+    
+            getArea() {
+                return this.#width * this.#height;
+            }
+        }
+    
+        const shape = new Rectangle(15, 8);
+    
+        console.log(shape instanceof Shape ? "true" : "false");
+        console.log(shape.getArea());
+    </script>
+    
+    <script>
+        console.log('Constructed Pattern');
+        function Employee(firstName,lastName){
+           this.firstName=firstName;
+           this.lastName=lastName;
+           this.fullName=function(){
+              return `Full Name is: ${this.firstName+' '+this.lastName}`;
+           }
+        }
+        const emp1=new Employee('Safrina','Nishi');
+        console.log(emp1.fullName());
+    </script>
+    <script>
+    console.log('Reuseable class');
+    class Person{
+        constructor(firstName,lastName){
+            this.firstName=firstName;
+            this.lastName=lastName;
+        }
+    }
+    const persn3=new Person('Safrina','Nishi');
+    console.log(persn3);
+    const persn4=new Person('AAAAA','BBBBB');
+    console.log(persn4);
+    const persn5=new Person('CCCCC','DDDDD');
+    console.log(persn5);
+    </script>
+
+<script>
+    console.log('Adding new property');
+    class person{
+        constructor(firstName,lastName,dateOfBirth){
+            this.firstName=firstName;
+            this.lastName=lastName;
+            this.dateOfBirth=dateOfBirth;
+        }
+        get age(){
+            if(this.dateOfBirth instanceof Date){
+                const today=new Date();
+                let age=today.getFullYear()-this.dateOfBirth.getFullYear();
+                const monthDiff=today.getMonth()-this.dateOfBirth.getMonth();
+                if(monthDiff<0 || monthDiff===0 && today.getDate()<this.dateOfBirth.getDate())
+                {
+                    age -= 1;
+                }
+                return age;
+            }
+        }
+    }
+    const person1=new person('Safrina','Nishi');
+    console.log(person1);
+    const person2=new person('AAAAA','BBBBB',new Date(2000,5,22));
+    console.log(person2.age);
+    const person3=new person('CCCCC','DDDDD');
+    console.log(person3);
+</script>
+
+<script>
+    console.log('static metod');
+
+    class Book {
+        constructor(title, author) {
+            this.title = title;
+            this.author = author;
+        }
+
+        static isEqual(book, anotherBook) {
+           
+            if (book instanceof Book && anotherBook instanceof Book) {
+                return book.title === anotherBook.title && book.author === anotherBook.author;
+            }
+            return false;
+        }
+    }
+
+    const book1 = new Book('Book A', 'Author A');
+    const book2 = new Book('Book A', 'Author A');
+    const book3 = new Book('Book B', 'Author B');
+
+    console.log(Book.isEqual(book1, book2));
+    console.log(Book.isEqual(book1, book3)); 
+    console.log(Book.isEqual(book1, {})); 
+</script>
+
+<script>
+    console.log("Class to string representation");
+    class Vehicle {
+      constructor(Name, Model, Year) {
+        this.Name = Name;
+        this.Model = Model;
+        this.Year = Year;
+      }
+      toString() {
+        return `Vehicle name : ${this.Name} Vehicle model : ${this.Model}
+        Vehicle Year : ${this.Year}`;
+      }
+    }
+    const forVehicle = new Vehicle("Ford", "GTR 10", 2010);
+    console.log(forVehicle.toString());
+</script>
+</body>
+</html>

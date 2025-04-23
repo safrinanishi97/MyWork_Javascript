@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <body onload="checkCookie()"></body>
+    <script>
+        function setCookie(name, value, days) {
+          const expirationDate = new Date();
+          expirationDate.setDate(expirationDate.getDate() + days);
+          document.cookie = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/`;
+        }
+        
+        
+        function getCookie(name) {
+          const cookies = document.cookie.split(';');
+          for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) 
+            {
+              return cookie.substring(name.length + 1);
+            }
+          }
+          return '';
+        }
+        
+        function checkCookie() {
+          const user = getCookie("username");
+          if (user) {
+            alert("Welcome again " + user);
+          } else {
+            const username = prompt("Please enter your name:");
+            if (username) {
+              setCookie("username", username, 30);
+            }
+          }
+        }
+        </script>
+        </head>
+
+    <script>
+        console.log("Using of session storage");
+  
+        sessionStorage.setItem("name", "Safrina");
+        sessionStorage.city = "Dhaka";
+        console.log(sessionStorage.length);
+        const name = sessionStorage.getItem("name");
+        console.log(`The stored name ${name}`);
+        const city = sessionStorage.getItem("city");
+        console.log(`The stored city ${city}`);
+  </script>
+  
+  
+  
+  <script>
+        console.log("An IndexedDB");
+      const dbName = "myDatabase";
+      const storeName = "myStore";
+
+      function openDB() {
+        const request = indexedDB.open(dbName, 1);
+
+        request.onerror = function (event) {
+          console.error("Database error:", event.target.error);
+        };
+
+        request.onsuccess = function (event) {
+          const db = event.target.result;          
+          addData(db);
+          getData(db);
+        };
+
+        request.onupgradeneeded = function (event) {
+          const db = event.target.result;
+          const objectStore = db.createObjectStore(storeName, {
+            keyPath: "id",
+          });
+        };
+      }
+
+      function addData(db) {
+        const transaction = db.transaction(storeName, "readwrite");
+        const objectStore = transaction.objectStore(storeName);
+
+        objectStore.add({
+          id: 1,
+          name: "Alice",
+          age: 30,
+        });
+        objectStore.add({ id: 2, name: "Bob", age: 25 });
+      }
+
+      function getData(db) {
+        const transaction = db.transaction(storeName, "readonly");
+        const objectStore = transaction.objectStore(storeName);
+
+        const getAllRequest = objectStore.getAll();
+
+        getAllRequest.onsuccess = function (event) {
+          const data = event.target.result;
+          console.log(data); 
+        };
+      }
+      openDB();
+
+  </script>
+  
+  <script>
+        console.log("local storage");
+        localStorage.setItem("name", "Safrina Akter");
+        localStorage.city = "Dhaka";
+        console.log(localStorage.length);
+        const name1 = localStorage.getItem("name");
+        console.log(`The stored name ${name1}`);
+        const city1 = localStorage.getItem("city");
+        console.log(`The stored city ${city1}`);
+  </script>
+</body>
+</html>

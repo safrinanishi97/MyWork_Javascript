@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .found {  
+            background-color: #ff0;
+        }
+        body {
+            margin: 15px;
+        }
+        textarea {
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        console.log("Replacing string");
+        const txt = "This is the context of testing a text by replacing word";
+        console.log(txt);
+        const newText = txt.replaceAll("testing", "cheaking");
+        console.log(newText);
+    </script>
+    <script>
+       console.log("Checking existing");
+        const a= new String('Safrina');
+        if (a.length>0)
+        {
+            console.log("Yes it's length is greater then 0");
+        }
+
+        const b ='Nishi';
+        if (typeof b === 'string')
+        {
+            console.log('Yes it is a string');
+        }
+
+        const c =' Nishi   ';
+        if(typeof c === 'string' && c.trim().length>0)
+        {
+            console.log("It's a string and its length is greater then 0");
+        }
+        const d='Safrinaaa';
+        if(typeof d === 'string' ||  String.prototype.isPrototypeOf(d))
+        {
+            console.log("It's a string or String Object");
+        }
+    </script>
+        
+    <script>
+           console.log("Converting number value to string");
+        const number=1242.0055432;
+
+        const toFixedString=number.toFixed(4);
+        console.log(toFixedString);
+
+
+        const toPrecisionString=number.toPrecision(7);
+        console.log(toPrecisionString);
+
+        const toExponentilString=number.toExponential(2);
+        console.log(toExponentilString);
+
+        console.log("Formatting number value");
+        const formatter = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' });
+        const num=123445;
+        const newString=formatter.format(num);
+        console.log(newString)
+    </script>
+     
+    <script>
+        console.log("Special_Characters");
+        const text = 'I am practicing the \'2nd chapter\'.';
+        console.log(text);
+
+        const copyRightNotice = 'Do not copy the text, there are the \u00A9copyright symbol.';
+        console.log(copyRightNotice);
+
+        const food = `The burger${String.fromCodePoint(0x1F354)} is delicious!!!`;
+        console.log(food);
+    </script>
+     
+    <script>
+           console.log("String interpolation with template literal");
+        const firstName='Safrina';
+        const lastName='Nishi';
+        const team='Team A';
+        const hireDate= new Date('2020-2-2');
+
+        function getdays(date)
+        {
+            const today = new Date();
+            const oneDay=24*60*60*1000;
+            return Math.round(Math.abs((today-date)/oneDay));
+        }
+        const employeeDetails = `The employee ${firstName} ${lastName}, member of ${team},is working on this team since ${hireDate}! That's ${getdays(hireDate)} days`;
+        console.log(employeeDetails);
+    </script>
+     
+
+    <script>
+        console.log("Case-Insensitive string");
+        const name='safrina';
+        const name1='SAFRINA';
+        if(name.toLowerCase()===name1.toLowerCase())
+        {
+            console.log(`From ${name} to ${name1}`);
+            console.log(`From ${name1} to ${name}`);
+        }
+    </script>
+    
+    <script>
+        const searchString = 'testing';
+        const fullText = 'This is the context for' +
+            ' testing a text by replacing word';
+            if (fullText.includes(searchString))
+        {
+            console.log(searchString);
+        }
+        else
+        {
+            console.log(`Not found`);
+        }
+
+        const replaceValue='checking';
+        const searchString1 = 'testing';
+        const fullText1 =  'This is the context for' +
+        ' testing a text by replacing word';
+       if (fullText1.includes(searchString1))
+        {
+            const replaceString=fullText1.replaceAll(searchString,replaceValue)
+            console.log(replaceString);
+        }
+        else
+        {
+            console.log(`Not found`);
+        }
+    </script>
+
+    <script>
+        console.log("Regular_Expression");
+
+        const mainString = "   Now the game begin, this game ends";
+        console.log(mainString);
+        const regEx = /g\w{2}e/g;
+        const changedString = mainString.replaceAll(regEx, "story");
+        console.log(changedString);
+        const trimedString = mainString.trim();
+        console.log(trimedString);
+    </script>
+
+    <script>
+            const subject = 'This is the module list of this course:' +
+            'CF, SQL, C#, Javascript,Node jS, Angular.';
+            const start = subject.indexOf(':');
+            const end = subject.indexOf('.');
+            const list=subject.slice(start+1,end);
+            console.log(list);
+            let mod=list.split(',');
+            console.log(mod);
+    </script>
+
+    <script>
+        const emailValid = "97safrinaishi@gmail.com";
+        const emailInvalid = "97safrinanishi@gmail .com";
+        const regEx1=/\S+@\S+\.\S+/;
+
+        if(regEx1.test(emailValid))
+        {
+            console.log('Valid');
+        }
+
+        if(regEx1.test(emailInvalid))
+        {
+            console.log('Valid');
+        }
+        else
+        {
+            console.log('Invalid');
+        }
+    </script>
+
+
+
+    <h1>Finding All Instances of a Pattern</h1>
+    <form id="textSearch">
+        <textarea id="newTxt"></textarea>
+        <p>Search Pattern: <input type="text" id="pattern"></p>
+    </form>
+
+    <button id="searchSubmit">Search The Pattern</button>
+    <div id="searchResult"></div>
+
+    <script>
+        document.getElementById('searchSubmit').onclick = function() {
+            const pattern = document.getElementById('pattern').value;
+            const regEx = new RegExp(pattern, 'g');
+            const searchText = document.getElementById('newTxt').value;
+
+            const highlightedText = searchText.replace(regEx, '<span class="found">$&</span>');
+            
+            document.getElementById('searchResult').innerHTML = "<pre>" + highlightedText + "</pre>";
+        }
+    </script>
+</body>
+</html>

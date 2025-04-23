@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+    console.log("Requesting remote data with fetch & error handle");
+
+    const url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+
+    async function fetchReq() {
+      const req = await fetch(url);
+      const data = await req.json();
+      console.log(data);
+    }
+    fetchReq();
+</script>
+
+
+
+
+
+<body onload="checkCookie()"></body>
+  <script>
+    function setCookie(cname, cvalue, exdays) {
+      const d = new Date();
+      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function checkCookie() {
+      let user = getCookie("username");
+      if (user != "") {
+        alert("Welcome again " + user);
+      } else {
+        user = prompt("Please enter your name:", "");
+        if (user != "" && user != null) {
+          setCookie("username", user, 30);
+        }
+      }
+    }
+</script>
+
+
+
+<script>
+    const urls = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KE";
+    async function fetchReqWithError() {
+      const res = await fetch(urls);
+      if (res.status >= 200 && res.status < 400) {
+        const data = await res.json();
+        console.log(data);
+      } else {
+        console.log(`${res.statusText}: ${res.status} error`);
+      }
+    }
+    fetchReqWithError();
+</script>
+
+
+<script>
+    const url1 = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+    async function fetchReqWithTryCatch() {
+      try {
+        const res = await fetch(url1);
+        if (res.status >= 200 && res.status < 400) {
+          const data = res.json();
+          console.log(data);
+        } else {
+          console.log(`${res.statusText}: ${res.status} error`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchReqWithTryCatch();
+</script>
+
+
+<script>
+    console.log("XML http request");
+    const url2 = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+    const req = new XMLHttpRequest();
+    req.open("GET", url2);
+    req.send();
+    req.onload = () => {
+      if (req.status >= 200 && req < 400) {
+        const data = JSON.parse(req.response);
+        console.log(data);
+      } else {
+        console.log(`${req.statusText}:${req.status} error`);
+      }
+    };
+    req.onerror = () => console.log(req.statusText);
+</script>
+
+
+<script>
+    console.log("Parsing returned json");
+    const jsonObj = '{"test":"value1","test2":5.97,"test3":0}';
+    const obj = JSON.parse(jsonObj, (key, value) => {
+      if (typeof value === "number") {
+        if (value === 0) {
+          value = false;
+        } else if (value === 1) {
+          value = true;
+        }
+      }
+      return value;
+    });
+    console.log(obj);
+</script>
+
+<script>
+
+const jsonString = '{"name": "Safrina", "age": 30}'; 
+const jsonObject = JSON.parse(jsonString); 
+console.log(jsonObject.name);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<script>
+    try {
+      const uri = decdeURi("htp%test");
+      console.log("success!");
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      const uri = decodeURI("http%test");
+
+      console.log("Success!");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log("this operation is complete");
+    }
+</script>
+
+
+
+<script>
+    const request = new XMLHttpRequest();
+    request.onerror = function errorHandler(error) {
+      console.log("XMLHttpRequest error: ", error);
+    };
+    request.open("GET", "https://jsonplaceholder.typicode.com/todos/1");
+    request.send();
+
+    fetch("http://noserver")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log("We did it, fam.");
+      })
+      .catch((error) => {
+        console.log("Fetch error: ", error);
+      });
+    async function doWork() {
+      try {
+        const response = await fetch("http://noserver");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log("Fetch successful");
+      } catch (error) {
+        console.log("Async/Await error: ", error);
+      }
+    }
+
+    doWork().then(() => {
+      console.log("All OK ");
+    });
+</script>
+
+<script>
+    try {
+      let obj = undefined;
+      console.log(obj.property);
+    } catch (error) {
+      if (error instanceof RangeError) {
+        console.log("Invalid array size");
+      } else if (error instanceof TypeError) {
+        console.log("Invalid type");
+      } else if (error instanceof ReferenceError) {
+        console.log("Undefined object property");
+      } else {
+        throw error;
+      }
+    }
+</script>
+
+<script>
+    window.onerror = (message, url, lineNo, columnNo, error) => {
+      console.log(`An unhandled error occurred in ${url} at line ${lineNo}`);
+      console.log(`Error message: ${message}`);
+    };
+    console.log(
+      "Value is either null or undefined, or does not have length."
+    );
+    window.onunhandledrejection = (e) => {
+      console.log("An unhandled promise rejection occurred:", e.reason);
+      e.preventDefault();
+    };
+    const faultyPromise = new Promise(() => {
+      throw new Error("Disaster strikes!");
+    });
+    const rejectedPromise = new Promise((resolve, reject) => {
+      reject(new Error("Another disaster strikes!"));
+    });
+    window.onunhandledrejection = (e) => {
+      console.log("An error occurred, but we won't tell you what it was");
+      e.preventDefault();
+    };
+</script>
+
+
+<script>
+    class CustomError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "CustomError";
+        if (Error.captureStackTrace) {
+          Error.captureStackTrace(this, CustomError);
+        }
+      }
+    }
+    try {
+      throw new CustomError("An application-specific problem occurred");
+    } catch (error) {
+      console.log(`Caught a CustomError: ${error.message}`);
+      console.log(error.stack);
+    }
+    class ProductNotFound extends Error {
+      constructor(missingProductID) {
+        super(`Product ${missingProductID} does not exist in the catalog`);
+        this.name = "ProductNotFound";
+        this.productID = missingProductID;
+        if (Error.captureStackTrace) {
+          Error.captureStackTrace(this, ProductNotFound);
+        }
+      }
+    }
+    try {
+      throw new ProductNotFound(380);
+    } catch (error) {
+      console.log(`An error occurred with the message: ${error.message}`);
+      if (error instanceof ProductNotFound) {
+        console.log(`Missing Product ID: ${error.productID}`);
+      }
+    }
+</script>
+
+
+
+
+<script>
+    function strictDivision(number, divisor) {
+      if (divisor === 0) {
+        throw new Error("Dividing by zero is not allowed");
+      } else {
+        return number / divisor;
+      }
+    }
+    try {
+      const result = strictDivision(84, 0);
+      console.log(result);
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+    try {
+      throw new Error("Dividing by zero is not allowed");
+    } catch (error) {
+      console.log(`Caught Error: ${error.message}`);
+    }
+    try {
+      throw Error("Dividing by zero is not allowed");
+    } catch (error) {
+      console.log(`Caught Error: ${error.message}`);
+    }
+    function setAge(age) {
+      const upper = 115;
+      const lower = 16;
+
+      if (age > upper || age < lower) {
+        throw new RangeError(
+          `Age [${age}] is out of the acceptable range of ${lower} to ${upper}.`
+        );
+      }
+    }
+    try {
+      setAge(120);
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+    function calculateValue(num) {
+      if (typeof num !== "number") {
+        throw new TypeError(`Value [${num}] is not a number.`);
+      }
+      return num * num;
+    }
+    try {
+      calculateValue("hello");
+    } catch (error) {
+      console.log(`Error: ${error.message}`);
+    }
+</script>
+</body>
+</html>

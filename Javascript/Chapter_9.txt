@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <script>
+      console.log('Promises');
+      function factorialize(number) {
+        return new Promise((resolve, reject) => {
+        
+            if (number < 0) {
+                reject('Factorials are only defined for positive numbers');
+            } else if (!Number.isInteger(number)) {
+                reject('Factorials are only defined for integers');
+            } else {
+           
+                setTimeout(() => {
+                    if (number === 0 || number === 1) {
+                        resolve(1); 
+                    } else {
+                        let result = 1;
+                        for (let i = 2; i <= number; i++) {
+                            result *= i;
+                        }
+                        resolve(result);
+                    }
+                }, 500);
+            }
+        });
+    }
+
+    function logResult(result) {
+        console.log(`Factorial result: ${result}`);
+    }
+
+    function logError(error) {
+        console.log(`Error: ${error.message}`);
+    }
+
+    factorialize(5)
+    .then(logResult)
+    .catch(logError);
+    </script>
+
+ 
+        <p id="paragraph"></p>
+        <p id="para1"></p>
+        <img id="downLoadImg" />
+        <img id="imgDownload" />
+    
+    
+    <script>
+          console.log(" Updating the Page During a Loop using synchronous while loop");
+          function getToWork() {
+            const element = document.getElementById("paragraph");
+            const start = Date.now();
+            let counter = 0;
+            element.innerText = "Processing started";
+            while (Date.now() - start < 5000) {
+              counter += 1;
+              element.innerText = `working on generating number${counter}`;
+            }
+            element.innerText = "process completed";
+          }
+          window.onload = getToWork;
+
+
+console.log("Updating the Page During a Loop Aysnchronously");
+
+        function getToWork() {
+          const element = document.getElementById("paragraph");
+          let counter = 0;
+
+          element.innerText = "Processing started";
+
+          function work() {
+            counter += 1;
+            element.innerText = `working on generating number ${counter}`;
+
+            if (counter < 500) {
+              setTimeout(work, 10);
+            } else {
+              element.innerText = "process completed";
+            }
+          }
+
+          work(); 
+        }
+
+        window.onload = getToWork;
+    </script>
+
+    
+    
+    <script>
+          console.log("Using a Function That Returns a Promise");
+          const promise = fetch(
+            "https://upload.wikimedia.org/wikipedia/commons/b/b2/Eagle_nebula_pillars.jpg"
+          );
+          promise.then(function onSuccess(res) {
+            console.log(`HTTP Status is : ${res.status}`);
+          });
+          promise.catch(function onCatch(err) {
+            console.error(`The error is ${err}`);
+          });
+    
+          promise.finally(function onFinally() {
+            console.log("all the work has been finished successfully");
+          });
+    </script>
+    
+    
+    
+     <script>
+          console.log("Compact promises");
+    
+          fetch(
+            "https://upload.wikimedia.org/wikipedia/commons/b/b2/Eagle_nebula_pillars.jpg"
+          )
+            .then((res) => {
+              if (!res.ok) {
+                throw new Error(
+                  `there is a error and HTTP status is ${res.status}`
+                );
+              } else {
+                return res.blob;
+              }
+            })
+            .then((blob) => {
+              const img = document.getElementById("downLoadImg");
+              img.src = URL.createObjectURL(blob);
+            })
+            .catch((err) => {
+              console.log("An error has been occured");
+            });
+    </script>
+    
+    <script>
+          console.log(" Executing Multiple Promises Concurrently ");
+          function singlePromiseWithWait() {
+            return new Promise((resolve, reject) => {
+              const waitFor = Math.round(Math.random() * 5000);
+              setTimeout(() => {
+                console.log(`Result appear ${waitFor} in milisecond`);
+                resolve(waitFor);
+              }, waitFor);
+            });
+          }
+          const time1 = singlePromiseWithWait();
+          const time2 = singlePromiseWithWait();
+          const time3 = singlePromiseWithWait();
+          const allTime = [time1, time2, time3];
+          Promise.all(allTime).then((value) => {
+            console.log(`All work done in ${value}`);
+          });
+    
+          const time4 = singlePromiseWithWait();
+          const time5 = singlePromiseWithWait();
+          const time6 = singlePromiseWithWait();
+          const Time = [time4, time5, time6];
+    
+          Promise.any(Time).then((values) => {
+            console.log(`Any work done in ${values}`);
+          });
+          const time7 = singlePromiseWithWait();
+          const time8 = singlePromiseWithWait();
+          const time9 = singlePromiseWithWait();
+          const firstinrace = [time7, time8, time9];
+          Promise.race(firstinrace).then((values) => {
+            console.log(`first work done in ${values}`);
+          });
+    </script>
+    
+    
+    <script>
+          console.log("Waiting for a Promise to Finish with Await and Async");
+          async function getDataFromWeb() {
+            const url =
+              "https://upload.wikimedia.org/wikipedia/commons/b/b2/Eagle_nebula_pillars.jpg";
+            const res = await fetch(url);
+            console.log(`status is ${res.status}`);
+          }
+          getDataFromWeb().then(() => {
+            console.log("the work completed Asynchronously");
+          });
+    </script>
+    
+    
+    <script>
+          async function imgDownloadAndShow() {
+            const url =
+              "https://upload.wikimedia.org/wikipedia/commons/b/b2/Eagle_nebula_pillars.jpg";
+            const res = await fetch(url);
+            if (res.ok) {
+              const blob = await res.blob();
+              const img = document.getElementById("imgDownload");
+              img.src = URL.createObjectURL(blob);
+            }
+          }
+          imgDownloadAndShow()
+            .then((res) => {
+              console.log("Img Download finished");
+            })
+            .catch((err) => {
+              console.error(`Error occured`);
+            });
+    </script>
+    
+    <script>
+          console.log("Creating an Asynchronous Generator Function");
+          async function* findNumberRandomly(max) {
+            while (true) {
+              yield Math.floor(Math.random() * Math.floor(max) + 1);
+            }
+          }
+          const generateMaxNum = findNumberRandomly(10);
+          for (let i = 0; i < 20; i++) {
+            const num = generateMaxNum.next();
+            console.log("get the numbers");
+            num.then((result) => console.log(`the result ${result.value}`));
+          }
+    
+          async function searchForNumbers(search, providor) {
+            for await (const value of providor) {
+              console.log(value);
+              if (value === search) return;
+            }
+          }
+          const numberFound = findNumberRandomly(100);
+          searchForNumbers(37, numberFound).then((result) => {
+            console.log("found the number");
+          });
+    </script>
+    
+</body>
+</html>

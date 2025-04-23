@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- CSS Code -->
+  <style>
+    .mystyle {
+      width: 100%;
+      padding: 25px;
+      background-color: coral;
+      color: white;
+      font-size: 25px;
+      box-sizing: border-box;
+      margin-top: 15px;
+    }
+    .newone {
+      width: 50px;
+      padding: 10px;
+      background-color: green;
+      color: white;
+      margin-top: 15px;
+    }
+    table, tr, td{
+      border: 2px solid green;
+      border-collapse: collapse;
+      padding: 10px;
+      background-color: aliceblue;
+    }
+    </style>
+
+</head>
+<body>
+
+  <h1>Working with HTML</h1>
+  <hr>
+  
+  <h2>Accessing a Given Element & Finding It's Parent & Child Elements</h2>
+  <div id="mydiv">
+    <p>Safrina Akter</p>
+  </div>
+  <br>
+
+  <h2>Traversing the Results from querySelectorAll() with forEach()</h2>
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+  </ul>
+  <br>
+
+  <h2>Adding Click Functionality to an Element</h2>
+  <div tabindex="0" role="button" id="click-link">Click Me</div>
+  <br>
+
+  <h2>Finding All Elements That Share an Attribute</h2>
+  <div>
+    <div class="red">Red Box</div>
+    <div class="blue">Blue Box</div>
+    <div class="green">Green Box</div>
+    <div>No class here</div>
+  </div>
+  <br>
+
+  <h2>Accessing All Elements of a Specific Type</h2>
+  <div>
+    <p><img src="apple.jpg" alt="Image Not Found" height="100px"/></p>
+    <p><img src="myHtml.png" alt="Image Not Found" height="100px"/></p>
+    <p><img src="orange.jpg" alt="Image Not Found" height="100px"/></p>
+  </div>
+  <br>
+
+  <h2>Discovering Child Elements Using the Selectors API</h2>
+  <article>
+    <img src="myHtml.png" alt="Image 1" height="100px">
+    <p>Paragraph below an image.</p>
+  </article>
+  <img src="apple.jpg" alt="Image 2" height="100px">
+  <img src="orange.jpg" alt="Image 3" height="100px">
+  <br>
+
+  <h2>Changing an Element's Class Value</h2>
+  <div>
+    <button onclick="myFunction()">Change Class</button>
+    <div id="myDIV" class="mystyle"> Safrina Akter </div>
+  <br>
+
+  <h2>Setting an Element's Style Attribute</h2>
+  <div id="myCard">Safrina Akter</div>
+  <br>
+
+  <h2>Adding Text to a New Paragraph</h2>
+  <div id="target">
+    <p>Safrina Akter</p>
+    <p>Bangladesh</p>
+  </div>
+  <br>
+
+  <h2>Inserting a New Element in a Specific DOM Location</h2>
+  <div id="targets">
+    <p>Bangladesh</p>
+    <p>Safrina Akter</p>
+    <p>JavaScript</p>
+  </div>
+  <br>
+
+  <h2>Checking If a Checkbox Is Checked</h2>
+  <input type="checkbox" id="check"> Are You Sure ?
+  <br>
+
+  <h2>Adding Up Values in an HTML Table</h2>
+  <table>
+    <tbody id="table1">
+      <tr >
+        <td>Dhaka</td>
+        <td>145</td>
+      </tr>
+      <tr>
+        <td>Khulna</td>
+        <td>233</td>
+      </tr>
+      <tr>
+        <td>Sylhet</td>
+        <td>833</td>
+      </tr>
+      <tbody>
+  </table>
+  <br>
+
+<!-- JavaScript Code -->
+
+  <script>
+    console.log("=====< Accessing a Given Element & Finding Its Parent & Child Elements >=====");
+    const mydiv = document.getElementById("mydiv");
+    const parent = mydiv.parentNode;
+    const children = mydiv.children;
+    console.log(`Parent Element: ${parent.nodeName}`);
+    if (mydiv.hasChildNodes()) {
+      let output = 'Child Element: ';
+      Array.from(children).forEach(child => {
+        output += `${child.nodeName} `;
+      });
+      console.log(output);
+    } else {
+      console.log('No children elements.');
+    }
+    console.log('');
+  </script>
+
+  <script>
+     console.log(" Traversing the Results from querySelectorAll() with forEach()");
+
+
+    const items = document.querySelectorAll('li');
+    items.forEach(item => {
+    console.log(item.textContent.trim()); 
+    });
+
+    console.log('');
+
+  </script>
+
+  <script>
+    console.log(" Adding Click Functionality to an Element");
+    const clickHandler = (event) => {
+    window.alert(`The ${event.currentTarget.nodeName} element has been clicked!`);
+    };
+    const clickableDiv = document.getElementById('click-link');
+    clickableDiv.addEventListener('click', clickHandler);
+    clickableDiv.addEventListener('keydown', (event) => {
+    if (event.code === 'Space' || event.code === 'Enter') {
+    clickableDiv.click();
+      }
+    });
+    console.log("Click the Text");
+    console.log('');
+  </script>
+
+  <script>
+    console.log("Finding All Elements That Share an Attribute ");
+    var elements = document.querySelectorAll('*[class]');
+    console.log("Elements with any class attribute:", elements);
+    const reds = document.querySelectorAll('*:is([class*="red"])');
+    console.log("Elements with a class containing 'red':", reds);
+    const notRed = document.querySelectorAll('div:not(.red)');
+    console.log("Div elements that do not have the 'red' class:", notRed);
+    console.log('');
+  </script>
+
+  <script>
+    console.log(" Accessing All Elements of a Specific Type ");
+    const imgs = document.getElementsByTagName('img');
+    console.log('Number of images before appending:', imgs.length);  
+    const p = document.createElement('p');
+    const img = document.createElement('img');
+    img.src = './myHtml.png';  
+    p.appendChild(img);  
+    const paras = document.getElementsByTagName('p');
+    paras[0].parentNode.appendChild(p); 
+    console.log('Number of images after appending:', imgs.length + 1);
+    console.log('');
+  </script>
+
+  <script>
+    console.log("Discovering Child Elements Using the Selectors API ");
+    const imgs1 = document.querySelectorAll('article img');
+    const imgs2 = document.querySelectorAll('img');
+    const imgs3 = document.querySelectorAll('article > img');
+    const imgs4 = document.querySelectorAll('img + p');
+    const imgs5 = document.querySelectorAll('img[alt=""]');
+    const imgs6 = document.querySelectorAll('img:not([alt=""])');
+    console.log("imgs1 (article img):", imgs1);
+    console.log("imgs2 (all img tags):", imgs2);
+    console.log("imgs3 (article > img):", imgs3);
+    console.log("imgs4 (img + p):", imgs4);
+    console.log('imgs5 (img with empty alt attribute):', imgs5);
+    console.log('imgs6 (img with non-empty alt attribute):', imgs6);
+    console.log('');
+  </script>
+
+  <script>
+    console.log("Changing an Element's Class Value");
+    function myFunction() {
+    const element = document.getElementById("myDIV");
+    element.classList.remove("mystyle");  
+    element.classList.add("newone"); 
+    }
+    console.log(" Click the Button");
+     console.log('');
+  </script>
+
+  <script>
+    console.log(" Setting an Element's Style Attribute ");
+    const card = document.getElementById('myCard');
+    myCard.setAttribute('style', 'background-color: red; color: white; border: 1px solid black');
+    console.log(" Style Attribute is Added");
+    console.log('');
+  </script>
+
+  <script>
+    console.log("Adding Text to a New Paragraph");
+    const div = document.getElementById('target');
+    const txt = prompt('Enter New Paragraph', '');
+    const oldPara = div.getElementsByTagName('p')[0];
+    const txtNode = document.createTextNode(txt);
+    const para = document.createElement('p');
+    para.appendChild(txtNode);
+    div.insertBefore(para, oldPara);
+    console.log("~~~~~~~~~~> New Text is Added <~~~~~~~~~~");
+    console.log('');
+  </script>
+
+  <script>
+    console.log("=====< Inserting a New Element in a Specific DOM Location >=====");
+    const divs = document.getElementById('targets');
+    const myPara = divs.getElementsByTagName('p');
+    const newPara = document.createElement('p');
+    const text = document.createTextNode('New Paragraph Content');
+    newPara.appendChild(text);
+    if (myPara[2]) {
+      divs.insertBefore(newPara, myPara[2]);
+    } else {
+      divs.appendChild(newPara);
+    }
+    console.log("~~~~~~~~~~> New Paragraph Content is Inserted <~~~~~~~~~~");
+    console.log('');
+  </script>
+
+  <script>
+    console.log("=====< Checking If a Checkbox Is Checked >=====");
+    const checkBox = document.getElementById('check');
+    const validate = () => {
+      if (checkBox.checked) {
+        console.log('Checkbox is Checked')
+      } else {
+        console.log('Checkbox is Not Checked')
+      }
+    }
+    checkBox.addEventListener('click', validate);
+    console.log("~~~~~~~~~~> Click the CheckBox <~~~~~~~~~~");
+    console.log('');
+  </script>
+
+  <script>
+    console.log("=====< Adding Up Values in an HTML Table >=====");
+    let sum = 0;
+    const cells = document.querySelectorAll('td:nth-of-type(2)');
+    cells.forEach(cell => {
+      sum += Number.parseFloat(cell.firstChild.data);
+    });
+    const newRow = document.createElement('tr');
+    const firstCell = document.createElement('td');
+    const firstCellText = document.createTextNode('Sum:');
+    firstCell.appendChild(firstCellText);
+    newRow.appendChild(firstCell);
+    const secondCell = document.createElement('td');
+    const secondCellText = document.createTextNode(sum);
+    secondCell.appendChild(secondCellText);
+    newRow.appendChild(secondCell);
+    document.getElementById('table1').appendChild(newRow);
+    console.log("~~~~~~~~~~> Summation of Values <~~~~~~~~~~");
+    console.log('');
+  </script>
+
+</body>
+</html>

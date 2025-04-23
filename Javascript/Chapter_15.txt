@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js"></script>
+    <style>
+        #svg1 {
+            margin: 300px 120px;
+            border: 2px solid red;
+        }
+
+        #svgelem {
+            margin: 300px 120px;
+            border: 2px dashed rgb(91, 221, 40);
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <svg id="svg1" width="600" height="600">
+        <rect id="square" width="400" height="400" fill="#252525" x="10" y="10" />
+        <script>
+            document.getElementById('square').addEventListener('click', function () {
+                const currentColor = this.getAttribute('fill');
+                this.setAttribute('fill', currentColor === '#252525' ? '#5555FF' : '#252525');
+            });
+        </script>
+    </svg>
+
+
+    <script type="text/javascript">
+        const data = [56, 99, 14, 12, 46, 33, 22, 100, 87, 6, 55, 44, 27, 28, 34];
+        const height = 400;
+        const barWidth = 85;
+        
+        // Create the linear scale for Y axis
+        const xScale = d3.scaleLinear()
+            .domain([0, d3.max(data)])
+            .range([0, height]);
+    
+        const svg = d3.select("body").append("svg")
+            .attr("width", data.length * (barWidth + 3))
+            .attr("height", height);
+    
+        svg.selectAll("rect")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("fill", "#101055")
+            .attr("x", (d, i) => i * (barWidth + 1))
+            .attr("y", d => height - xScale(d))
+            .attr("width", barWidth)
+            .attr("height", d => xScale(d));
+    </script>
+
+
+
+    <svg id="svgelem" height="400" width="600">
+        <foreignObject width="300" height="150">
+            <canvas id="thisCanvas" width="300" height="150">
+                Alternate content for browsers that do not support Canvas
+            </canvas>
+        </foreignObject>
+        <circle id="redcircle" cx="300" cy="200" r="100" fill="blue" stroke="#252525" />
+        
+        <script>
+            document.getElementById('thisCanvas').getContext('2d')
+                .fillStyle = "#4565FF";
+            document.getElementById('thisCanvas').getContext('2d')
+                .fillRect(0, 0, 200, 200);
+        </script>
+    </svg>
+
+</body>
+
+</html>

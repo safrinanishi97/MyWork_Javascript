@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log("Random Number");
+        
+        const num= Math.random();
+        console.log(num);
+        const number1 = Math.floor(num * 100) + 1;
+        console.log(number1);
+
+        const number2 = Math.floor(2.123456789) + 1;
+        console.log(number2);
+  
+        const num1 = 32.489387;
+        const roundNum = Math.round(num1);
+        console.log(roundNum);
+  
+        const roundnums = num1 * 10 ** 2;
+        console.log(roundnums);
+        let roundedNum = Math.round(roundnums);
+        console.log(roundedNum);
+        roundedNum = roundedNum / 10 ** 2;
+        console.log(roundedNum);
+  </script>
+
+<script>
+	console.log("Accuracy Decimal Value");
+      
+      const oldBalance = 7634.25;
+      const enteredAmount = 593.03;
+      const newBalance = oldBalance - enteredAmount;
+      console.log(newBalance);
+      console.log(newBalance.toFixed());
+</script>
+
+<script>
+    console.log("Converting string to number");
+    const strings = "12";
+    const nums = 10;
+    console.log(strings);
+
+    const numbers = Number(strings);
+    console.log(numbers);
+
+    if (Number.isNaN(numbers)) 
+    {
+      console.log("NaN");
+    } 
+    else 
+    {
+      console.log("number");
+    }
+
+      const numData = parseFloat(strings);
+      console.log(numData);
+
+
+      const badDate = "10 apple";
+      console.log(badDate);
+      const convertedDate = new Date(badDate);
+      if (isNaN(convertedDate)) 
+      {
+        console.log("ok");
+      } 
+      else 
+      {
+        console.log("not");
+      }
+</script>
+
+  <script>
+      console.log('Date time');
+
+      const today = new Date();
+      console.log(today.getFullYear());
+      console.log(today.getMonth());
+      console.log(today.getDay());
+
+      const stringDate = "12/30/2024";
+      const dateArray = stringDate.split("/");
+      console.log(dateArray);
+      
+      const year = dateArray[2];
+      const month = dateArray[0];
+      const day = dateArray[1];
+    
+      const eventDate = new Date(year, month-1, day);
+      console.log(eventDate);
+
+      const oleDate = new Date(1999, 10, 20);
+      const newDate = new Date(2021, 1, 1);
+      if (newDate > oleDate) 
+      {
+        console.log("true");
+      } 
+      else 
+      {
+        console.log("false");
+      }
+
+      const today1 = new Date();
+      const todayDifferent = new Date();
+      console.log(today1.getDate() === todayDifferent.getDate());
+
+      const date = new Date(2021, 0, 1, 10, 30);
+      let dateString = date.toString();
+      console.log(dateString);
+  </script>
+
+  <script>
+      console.log("Convertion Degrees & Radians");
+
+      const radians = 47 * (Math.PI / 180);
+      console.log(radians);
+
+      const degrees = radians * (180 / Math.PI);
+      console.log(degrees);
+
+      const radius = degrees * (Math.PI / 180);
+      const arclangth = radians * radius;
+      console.log(arclangth);
+  </script>
+
+ <script>
+
+        const maxInt = Number.MAX_SAFE_INTEGER
+        console.log(maxInt);
+
+        const bigInt = BigInt(maxInt);
+        console.log(bigInt);
+
+        let bigInteger = 10n;
+        let int = Number(bigInteger);
+        console.log(int);
+
+        let x = 20n;
+        let y= 10n;
+        let sum=x+y;
+        console.log(sum);
+    
+
+        const decNum = 55;
+        console.log(decNum);
+        const octNum = decNum.toString(8);
+        console.log(octNum);
+        const hexNum = decNum.toString(16);
+        console.log(hexNum);
+        const binNum = decNum.toString(2);
+        console.log(binNum);
+    </script>
+
+</body>
+</html>
